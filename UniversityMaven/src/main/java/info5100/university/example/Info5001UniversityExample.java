@@ -5,6 +5,7 @@
  */
 package info5100.university.example;
 
+import Feedback.Certifications;
 import Feedback.CourseFeedback;
 import com.github.javafaker.Faker;
 import info5100.university.example.CourseCatalog.Course;
@@ -13,6 +14,8 @@ import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.CourseSchedule.Seat;
 import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Alumini;
+import info5100.university.example.Persona.AluminiDirectory;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
@@ -62,9 +65,11 @@ public class Info5001UniversityExample {
         Course course = department.newCourse("app eng", "info 5100", 4);
         Course webCourse = department.newCourse("Web design", "info 6210", 4);
         
-        for(int i=0;i<10;i++){
-            //Course randomCourse = department.
-        }
+//        for(int i=0;i<10;i++){
+//            //Course randomCourse = department.
+//            Course randomCourse = department.newCourse("app eng", "info 5100", 4);
+//            randomCourse.
+//        }
         
 
         CourseSchedule courseschedule = department.newCourseSchedule("Fall2020");
@@ -175,7 +180,6 @@ public class Info5001UniversityExample {
         HashMap<String, Double> hm = new HashMap<>();
         System.out.println(departmentStudents.size());
          for(StudentProfile studentProfile: departmentStudents){
-//            System.out.println(studentProfile.getTranscript().calculateGPA());
             hm.put(studentProfile.getPerson().getPersonId(), studentProfile.getTranscript().calculateGPA());
         }
          
@@ -216,13 +220,29 @@ public class Info5001UniversityExample {
                           ", Value = " + en.getValue()); 
         } 
         
+        System.out.println("----------------------Alumini----------------------");
         
-        
-        
-//        for(CourseFeedback feedback: feedbacks){
-//            System.out.println(feedback.getAverageRating());
-//        }
+        AluminiDirectory alumuniDirectory = new AluminiDirectory();
 
+        for(int i=0;i<100;i++){
+            Alumini newAlum = new Alumini();
+            newAlum.addCertification();
+            newAlum.addCertification();
+            alumuniDirectory.getAluminiList().add(newAlum);
+        }
+        
+        //Certifications done for people with salary of above 90,000
+        int count = 0;
+        for(Alumini alum: alumuniDirectory.getAluminiList()){
+            if(alum.getSalary() > 100000){
+                count++;
+               for(Certifications cert:alum.getCertificationsDirectory().
+                    getCertificationList()){
+                    System.out.println(cert.getDomain());
+                } 
+            }
+        }
+        System.out.println(count);
     }
     
     public static StudentProfile createNewStudent(Department department, String id){
