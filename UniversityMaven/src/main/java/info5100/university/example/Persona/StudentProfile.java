@@ -5,6 +5,8 @@
  */
 package info5100.university.example.Persona;
 
+import Feedback.CourseFeedback;
+import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.Persona.EmploymentHistory.EmploymentHistroy;
 
@@ -70,6 +72,11 @@ public class StudentProfile {
 
     public void setEmploymenthistory(EmploymentHistroy employmenthistory) {
         this.employmenthistory = employmenthistory;
+    }
+    
+    public CourseFeedback generateCourseFeedback(Course course, int assignmnetRating, int quizRating, int informationRating, int qualityRating){
+        CourseFeedback feedback = new CourseFeedback(course, assignmnetRating, quizRating, informationRating, qualityRating);
+        return feedback;
     }
     
     

@@ -32,4 +32,13 @@ public class Course {
         return price*credits;
         
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

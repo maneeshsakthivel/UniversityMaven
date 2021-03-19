@@ -18,12 +18,14 @@ public class CourseFeedback {
     int informationRating;
     int qualityRating;
     double avaerageRating = 0; //Final rating
-
-    public CourseFeedback() {
-         assignmnetRating = 0;
-         quizRating = 0;
-         informationRating = 0;
-         qualityRating = 0;
+ 
+    public CourseFeedback(Course course, int a, int b, int c, int d) {
+        this.course = course;
+         assignmnetRating = a;
+         quizRating = b;
+         informationRating = c;
+         qualityRating = d;
+         setAverageRating();
     }
 
     public Course getCourse() {
@@ -66,13 +68,12 @@ public class CourseFeedback {
         this.qualityRating = qualityRating;
     }
     
-    public void getAverageRating(){
+    private void setAverageRating(){
        avaerageRating = (assignmnetRating + qualityRating + informationRating + quizRating)/ 4;
     }
     
-    
-    
-    
-    
+    public double getAverageRating(){
+        return avaerageRating;
+    }
     
 }

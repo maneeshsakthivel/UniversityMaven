@@ -5,6 +5,7 @@
  */
 package info5100.university.example;
 
+import Feedback.CourseFeedback;
 import com.github.javafaker.Faker;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseSchedule.CourseLoad;
@@ -44,8 +45,8 @@ public class Info5001UniversityExample {
         System.out.println(faker.gameOfThrones().quote());
         System.out.println(faker.gameOfThrones().quote());
         System.out.println(faker.gameOfThrones().quote());
-        System.out.println(faker.gameOfThrones().character());
-        System.out.println(faker.gameOfThrones().character());
+        System.out.println( faker.number().randomDigitNotZero());
+        System.out.println( faker.number().numberBetween(10, 100));
         System.out.println(faker.gameOfThrones().character());
         System.out.println(faker.gameOfThrones().character());
         
@@ -55,9 +56,16 @@ public class Info5001UniversityExample {
         System.out.println(faker.number().digits(5));
         
         Department department = new Department("Information Systems");
+        ArrayList<CourseFeedback> feedbacks = new ArrayList<>();
+
 
         Course course = department.newCourse("app eng", "info 5100", 4);
-        department.newCourse("Web design", "info 6210", 4);
+        Course webCourse = department.newCourse("Web design", "info 6210", 4);
+        
+        for(int i=0;i<10;i++){
+            //Course randomCourse = department.
+        }
+        
 
         CourseSchedule courseschedule = department.newCourseSchedule("Fall2020");
 
@@ -87,6 +95,16 @@ public class Info5001UniversityExample {
             CourseLoad randomCourseload = randomStudent.newCourseLoad("Fall2020");
             randomCourseload.newSeatAssignment(webCourseOffer);  
             randomCourseload.newSeatAssignment(courseoffer);
+            feedbacks.add(randomStudent.generateCourseFeedback(webCourse, 
+                    faker.number().numberBetween(10, 100), 
+                    faker.number().numberBetween(10, 100),
+                    faker.number().numberBetween(10, 100),
+                    faker.number().numberBetween(10, 100)));
+            feedbacks.add(randomStudent.generateCourseFeedback(course, 
+                    faker.number().numberBetween(10, 100), 
+                    faker.number().numberBetween(10, 100),
+                    faker.number().numberBetween(10, 100),
+                    faker.number().numberBetween(10, 100)));
         }
         
         
@@ -178,9 +196,32 @@ public class Info5001UniversityExample {
             System.out.println("Key = " + en.getKey() +  
                           ", Value = " + en.getValue()); 
         } 
-
+        
+        System.out.println("----------------------Course Feedback----------------------");
+        
+        feedbacks.add(student.generateCourseFeedback(webCourse, 10, 20, 30, 40));
+        feedbacks.add(student.generateCourseFeedback(course,  40, 50, 70, 40));
         
         
+        HashMap<String, Double> courseRatings = new HashMap<>();
+        
+        //Fetch reviews based on courses
+        for(Course c:department.getCourseCatalog().getCourseList()){
+            courseRatings.put(c.getName(), getAverageCourseRatings(feedbacks,c));
+            
+        }
+        
+        for (Map.Entry<String, Double> en : courseRatings.entrySet()) { 
+            System.out.println("Key = " + en.getKey() +  
+                          ", Value = " + en.getValue()); 
+        } 
+        
+        
+        
+        
+//        for(CourseFeedback feedback: feedbacks){
+//            System.out.println(feedback.getAverageRating());
+//        }
 
     }
     
@@ -239,5 +280,18 @@ public class Info5001UniversityExample {
         } 
         return temp; 
     } 
+    
+    public static double getAverageCourseRatings(ArrayList<CourseFeedback> feedbacks, Course course){
+        double finalAverage = 0;
+        int feedbackCount = 0;
+        for(CourseFeedback feedback: feedbacks){
+            if(course.getName().equalsIgnoreCase(feedback.getCourse().getName())){
+                finalAverage += feedback.getAverageRating();
+                feedbackCount++;
+            }
+        }
+        finalAverage = finalAverage/feedbackCount;
+        return finalAverage;
+    }
 
 }
