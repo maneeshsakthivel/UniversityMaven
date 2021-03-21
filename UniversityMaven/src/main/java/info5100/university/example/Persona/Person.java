@@ -12,12 +12,17 @@ package info5100.university.example.Persona;
 public class Person {
     
     String id;
-    public Person (String id){
-        
+    String name;
+    public Person (String id, String name){
+        this.name = name;
         this.id = id;
     }
     public String getPersonId(){
         return id;
+    }
+    
+    public String getName(){
+        return name;
     }
 
         public boolean isMatch(String id){

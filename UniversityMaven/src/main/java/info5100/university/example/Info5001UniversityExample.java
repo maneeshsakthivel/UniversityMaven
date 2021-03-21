@@ -80,7 +80,7 @@ public class Info5001UniversityExample {
         courseoffer.generatSeats(20);
         
         PersonDirectory pd = department.getPersonDirectory();
-        Person person = pd.newPerson("0112303");
+        Person person = pd.newPerson("0112303", faker.name().fullName());
         StudentDirectory sd = department.getStudentDirectory();
         StudentProfile student = sd.newStudentProfile(person);
         CourseLoad courseload = student.newCourseLoad("Fall2020"); 
@@ -246,8 +246,9 @@ public class Info5001UniversityExample {
     }
     
     public static StudentProfile createNewStudent(Department department, String id){
+        Faker fake = new Faker();
         PersonDirectory pd = department.getPersonDirectory();
-        Person person = pd.newPerson(id);
+        Person person = pd.newPerson(id, fake.name().fullName());
         StudentDirectory sd = department.getStudentDirectory();
         StudentProfile student = sd.newStudentProfile(person);
         return student;

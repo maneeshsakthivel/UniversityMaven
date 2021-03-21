@@ -79,5 +79,9 @@ public class StudentProfile {
         return feedback;
     }
     
+    @Override
+    public String toString(){
+        return this.person.id;
+    }
     
 }
