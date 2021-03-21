@@ -2,7 +2,6 @@
 import Feedback.Certifications;
 import info5100.university.example.Persona.Alumini;
 import info5100.university.example.Persona.AluminiDirectory;
-import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -15,16 +14,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author maneesh
  */
-public class AluminiCertification extends javax.swing.JPanel {
+public class DoGradesMatterPannel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AluminiCertification
+     * Creates new form DoGradesMatterPannel
      */
-    int minSalary;
-    int maxSalary;
+    double minGpa;
+    double maxGpa;
     AluminiDirectory alumuniDirectory;
-    public AluminiCertification(AluminiDirectory alumuniDirectory) {
-        initComponents(); 
+    public DoGradesMatterPannel(AluminiDirectory alumuniDirectory) {
+        initComponents();
         this.alumuniDirectory = alumuniDirectory;
     }
     
@@ -34,14 +33,13 @@ public class AluminiCertification extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(Alumini alum: alumuniDirectory.getAluminiList()){
-            if(alum.getSalary() > minSalary && alum.getSalary() < maxSalary){
-                for(Certifications cert:alum.getCertificationsDirectory().
-                    getCertificationList()){
+            if(alum.getGrade()> minGpa && alum.getGrade()< maxGpa){
+                
                         Object[] row = new Object[2];
                         row[0] =  alum.getPerson().getName();
-                        row[1] = cert.getName();
+                        row[1] = alum.getSalary();
                         model.addRow(row);
-                } 
+               
             }
         }
     }
@@ -55,18 +53,14 @@ public class AluminiCertification extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-
-        jLabel1.setText("Domains based on salary");
-
-        jLabel2.setText("Min Salary");
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +68,7 @@ public class AluminiCertification extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Max Salary");
+        jLabel3.setText("Max GPA");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,7 +78,7 @@ public class AluminiCertification extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Alumini Name", "Certification in"
+                "Alumini Name", "Salary"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -96,17 +90,23 @@ public class AluminiCertification extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-        }
 
-        jButton1.setText("Get Domains");
+        jButton1.setText("Get  Salary");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Salary based on GPA");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Min GPA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,24 +119,22 @@ public class AluminiCertification extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(jButton1)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -152,7 +150,7 @@ public class AluminiCertification extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,11 +160,15 @@ public class AluminiCertification extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        minSalary = Integer.parseInt(jTextField1.getText());
-        maxSalary = Integer.parseInt(jTextField2.getText());
+        minGpa = Double.parseDouble(jTextField1.getText());
+        maxGpa = Double.parseDouble(jTextField2.getText());
         populateTable();
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

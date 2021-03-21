@@ -19,12 +19,14 @@ public class Alumini {
      int internships;
      int intersnhipDuration;
      int salary;
+     double grade;
      Faker fake;
      CertificationsDirectory directory;
      
      public Alumini(){
          fake = new Faker();
          person = new Person(fake.number().digits(5), fake.name().fullName());
+         grade = fake.number().randomDouble(2, 2, 4);
          directory = new CertificationsDirectory();
          this.salary = fake.number().numberBetween(60000, 200000);
      }
@@ -92,6 +94,10 @@ public class Alumini {
 
     public void setDirectory(CertificationsDirectory directory) {
         this.directory = directory;
+    }
+    
+    public double getGrade(){
+        return grade;
     }
      
      
